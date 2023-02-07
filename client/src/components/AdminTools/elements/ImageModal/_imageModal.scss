@@ -1,0 +1,116 @@
+.editor{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index: 75;
+    &__content{
+        padding:80px 20px 50px 20px;
+        width:500px;
+        @media screen and (max-width:1024px) {
+            width:250px;
+        }
+        background-color: white;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-direction: column;
+        box-shadow: 6px 6px 18px 0px rgba(0, 0, 0, 0.5); 
+        border: 1px solid rgba(128, 128, 128, 0.8);
+        &__tools{
+            margin-top:5px;
+            &__menager{
+                margin-top:50px;
+                height:10px;
+                width:450px;
+                @media screen and (max-width:1024px) {
+                    width:225px;
+                }
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .tools{
+                    // TODO tools - resize, draw, filters...
+                }
+                .buttons{
+                    .btnCancel{
+                        border:none;
+                        padding:5px 15px;
+                        margin-right:5px;
+                        background-color: rgb(126, 126, 126);
+                        border:1px solid rgb(114, 114, 114);
+                        border-radius: 5px;
+                        color:white;
+                        font-family: 'cocoregular';
+                    }
+                    button{
+                        border:none;
+                        padding:5px 15px;
+                        background-color: rgb(103, 200, 103);
+                        border:1px solid rgb(38, 146, 38);
+                        border-radius: 5px;
+                        color:white;
+                        font-family: 'cocoregular';
+                    }
+            }
+        }
+    }
+        &::before{
+            @media screen and (max-width:1024px) {
+                left:30px;
+            }
+            position:absolute;
+            content:'Dopasuj zdjęcie';
+            left:45px;
+            top:25px;
+            font-family: 'cocoregular';
+            font-size: 22px;
+            color: rgb(54, 54, 54); 
+        }
+        &__wrapper{
+            @media screen and (max-width:1024px) {
+                width:225px;
+                height:225px;
+            }
+            width:450px;
+            height:450px;
+            border: 1px solid rgb(128, 128, 128); 
+            overflow: hidden;
+            position:relative;
+            cursor:move;
+            &__image{
+                &__circle{
+                    height:100%;
+                    width:100%;
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    z-index: 5;
+                    user-select: none;
+                    -moz-user-select: none;
+                    -webkit-user-drag: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                }
+                display:flex;
+                justify-content: center;
+                img{
+                    z-index: 2;
+                    @media screen and (max-width:1024px) {
+                        height: 225px;
+                    }
+                    height: 450px;
+                    user-select: none;
+                    -moz-user-select: none;
+                    -webkit-user-drag: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    position: relative;            
+                }
+            }
+        }
+    }
+}

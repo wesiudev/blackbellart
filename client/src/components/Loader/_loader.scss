@@ -1,0 +1,43 @@
+.loader{
+    position:fixed;
+    height:100vh;
+    width:100vw;
+    top:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.95);
+    display:flex;
+    justify-content: center;
+    z-index: 25;
+    &__content{
+        height:90vh;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        &__logo{
+            overflow: visible;
+            &__triangle{
+                fill:none;
+                stroke:white;
+                stroke-width:30;
+                stroke-miterlimit:10;
+            }
+        }
+    &__text{
+        margin:-30px auto 0 auto;
+        height:150px;
+        overflow-y: hidden;
+        h1{
+            transform:translateY(-200px);
+            font-size: 48px;
+            color:white;
+            font-weight: 700;
+            font-family: 'Titillium Web', sans-serif;
+        }
+    }
+    }
+}
+.easeOut{
+    opacity:0;
+    transition:.5s;
+}

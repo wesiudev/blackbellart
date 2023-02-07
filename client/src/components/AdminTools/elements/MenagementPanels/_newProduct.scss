@@ -1,0 +1,139 @@
+.newProduct{
+    width:100%;
+    position:relative;
+    &__content{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin:0 auto;
+        &__row{
+            display:flex;
+            flex-direction: row;
+            position: relative;
+            flex-wrap: wrap;
+            div{
+                h3{
+                    margin-left:20px;
+                }
+                ol{
+                    margin:20px;
+                    padding:0;
+                    li{
+                        display:flex;
+                        flex-direction: row;
+                        align-items: center;
+                        position:relative;
+                        
+                    }
+                }
+            }
+            input{
+                margin:20px;
+                position: relative;
+                overflow: visible;
+                height:50px;
+                color:transparent;
+                &::before{
+                    height:50px;
+                    width:225px;
+                    content:'';
+                    position:absolute;
+                    left:0;
+                    top:0;
+                    background-color: rgb(99, 99, 99);
+                    border:1px solid rgb(66, 66, 66);
+                }
+                &::after{
+                    position: absolute;
+                    left:12px;
+                    top:16px;
+                    color:rgb(245, 245, 245);
+                    content:'Dodaj zdjęcie';
+                    font-size: large;
+                }
+            }
+        }
+        &__inputs{
+            display:flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            &__arrays{
+                margin:20px;
+                display:flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                div{
+                    display:flex;
+                    flex-direction: column;
+                    width:100%;
+                    .row{
+                        display:flex;
+                        flex-direction: row;
+                        button{
+                            margin:0 0 0 5px;
+                            width:70px;
+                        }
+                        input{
+                            width:200px;
+                        }
+                    }
+                    .col{
+                        &__item{
+                            margin-top: 10px;
+                            display:flex;
+                            flex-direction: row;
+                            justify-content: flex-start;
+                            .color{
+                                height:25px;
+                                width:25px;
+                                border:1px solid grey;
+                            }
+                        }
+                    }
+                }
+            }
+            &__text{
+                display:flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                &__input{
+                    display:flex; 
+                    flex-direction: column;
+                    margin:20px;
+                    width:200px;
+                    @media screen and (max-width:766px) {
+                        width:80%;
+                    }
+                }
+            }
+        }
+    }
+    .buttonAdd{
+        margin:25px 0 20px 20px;
+        width:150px;
+        padding:5px 5px;
+        background-color: #67c867;
+        border:1px solid rgb(38, 146, 38);
+        border-radius: 5px;
+        color:white;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .btnRemove{
+        text-align: center;
+        cursor: pointer;
+        margin: 5px 10px 0 5px;
+        height:1.75vh;
+        width:1.75vh;
+        border-radius: 50%;
+        background-color: rgb(231, 108, 108);
+        border:1px solid rgb(196, 72, 72);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+    }
+}

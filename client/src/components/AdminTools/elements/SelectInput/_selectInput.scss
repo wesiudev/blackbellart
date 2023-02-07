@@ -1,0 +1,93 @@
+    .select{
+        width: 225px;
+        height:50px;
+        position: relative;
+        z-index: 5;
+        margin:20px 40px 20px 20px;
+        &__chosen{
+            font-size: large;
+            color:rgb(245, 245, 245);
+            background-color: rgb(99, 99, 99);
+            padding:12px;
+            display:flex;
+            justify-content: space-between;
+            cursor:pointer;
+        }
+        &__arrow{
+            transform: rotate(0.25turn)scale(1.5 ,2.35);
+            color:rgb(245, 245, 245);
+        }
+        &__menu{
+            transform:translate(0, -50%) scale(1, 0.0001);
+            transition:.5s;
+            position: relative;
+            overflow-y: scroll;
+            max-height:150px;
+            &::-webkit-scrollbar-thumb {
+                background-color: rgb(66, 66, 66);
+                border-radius: 25px;
+            }
+            &::-webkit-scrollbar {
+                width: 8px;
+                height: 10px;
+                background-color: rgb(99, 99, 99);
+            }
+            &--opened{
+                transform: scale(1, 1);
+                transition:.5s;
+                position: relative;
+                overflow-y: scroll;
+                max-height:150px;
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgb(66, 66, 66);
+                    border-radius: 25px;
+                }
+                &::-webkit-scrollbar {
+                    width: 8px;
+                    height: 10px;
+                    background-color: rgb(99, 99, 99);
+                }
+            }
+        }
+        &__item{
+            padding:12px;
+            top:0;
+            position:relative;
+            background-color: rgb(136, 136, 136);
+            color: rgb(245, 245, 245);
+            cursor:pointer;
+            display:flex;
+            align-items: center;
+            &:hover{
+                background-color: rgb(172, 172, 172);
+            }
+            &--checked{
+                width:18px;
+                height:18px;
+                border-radius: 50%;
+                background-color:rgb(95, 201, 135);
+                position:absolute;
+                right:10px;
+                &::before{
+                    width:7px;
+                    height:2px;
+                    background-color: white;
+                    content: '';
+                    position:absolute;
+                    top:10px;
+                    left:3px;
+                    transform: rotate(45deg);
+                }
+                &::after{
+                    width:12px;
+                    height:2px;
+                    background-color: white;
+                    content: '';
+                    position:absolute;
+                    top:8px;
+                    left:5px;
+                    transform: rotate(120deg);
+                }
+            }
+        }
+    }

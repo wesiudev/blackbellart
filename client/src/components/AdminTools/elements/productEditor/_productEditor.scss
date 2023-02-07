@@ -1,0 +1,95 @@
+.editor{
+    position:fixed;
+    left:0;
+    top:0;
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    margin-top:45px;
+    &__content{
+        width:500px;
+        max-height: 80vh;
+        box-shadow: 3px 3px 9px black;
+        background-color: white;
+        position: relative;
+        overflow-y:scroll;
+        padding:0 15px 30px 15px;
+        &::-webkit-scrollbar-thumb {
+            background-color: black;
+            border:1px solid white;
+        }
+        &::-webkit-scrollbar {
+            border-left:1px solid rgba(128, 128, 128, 0.5);
+            width: 10px;
+            background-color: white;
+        }
+        .inputMenu{
+            height:100%;
+            width:100%;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            position:fixed;
+            left:0;
+            top:0;
+            &__content{
+                padding:15px 10px;
+                display:flex;
+                align-items: center;
+                flex-direction: column;
+                background-color: white;
+                box-shadow: 3px 3px 9px black;
+                .buttons{
+                    display:flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width:100%;
+                    margin-top: 20px;
+                    padding:5px;
+                }
+            }
+        }
+        .feed{
+            width:95%;
+            margin:0 auto;
+            &__topSide{
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items:center;
+                .closeEditor{
+                    height:35px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            hr{
+                width:100%;
+            }
+        }
+    }
+}
+
+.btnCancel{
+    border:none;
+    padding:5px 15px;
+    margin-right:5px;
+    background-color: rgb(126, 126, 126);
+    border:1px solid rgb(114, 114, 114);
+    border-radius: 5px;
+    color:white;
+    cursor:pointer;
+}
+.btnSave{
+    border:none;
+    padding:5px 15px;
+    background-color: rgb(103, 200, 103);
+    border:1px solid rgb(38, 146, 38);
+    border-radius: 5px;
+    color:white;
+    cursor:pointer;
+}

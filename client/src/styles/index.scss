@@ -1,0 +1,53 @@
+@import '../components/Home/home';
+@import '../components/Header/header';
+@import '../components/Loader/loader';
+@import '../components/Gallery/gallery';
+@import '../components/Admin/admin';
+@import '../components/Footer/footer';
+@import '../components/AdminTools/adminTools';
+@import '../components/shop/shop';
+@import '../components/AdminTools/elements/SelectInput/selectInput';
+@import '../components/AdminTools/elements/MenagementPanels/newProduct';
+@import '../components/AdminTools/elements/productEditor/productEditor';
+@import '../components/AdminTools/elements/productEditor/elements/itemLoader/itemLoader';
+@import '../components/AdminTools/elements/productEditor/elements/editorElements';
+ 
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap');
+body,html{
+    box-sizing:border-box;
+    padding:             0;
+    margin:              0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    &::-webkit-scrollbar-thumb {
+        background-color: black;
+        border:1px solid white;
+    }
+    &::-webkit-scrollbar {
+        border-left:1px solid rgba(128, 128, 128, 0.5);
+        width: 10px;
+        background-color: white;
+    }
+}
+button{
+    font-family: 'Montserrat', sans-serif;
+}
+a{
+    text-decoration: none;
+    color:        inherit;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+}
+.col{
+    display:flex;
+    flex-direction: column;
+}
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

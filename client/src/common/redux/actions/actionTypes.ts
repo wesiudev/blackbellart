@@ -1,0 +1,45 @@
+//auth
+export const AUTH = "AUTH"
+export const LOGOUT = "LOGOUT"
+
+//ownerauth
+export const OWNER_AUTH = "OWNER_AUTH"
+
+//server feedback
+export const USE_SERVER_FEEDBACK = "USE_SERVER_FEEDBACK"
+export const CLEAR_SERVER_FEEDBACK = "CLEAR_SERVER_FEEDBACK"
+
+//categories
+export const ADD_CATEGORY = "ADD_CATEGORY"
+export const REMOVE_CATEGORY = "REMOVE_CATEGORY"
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
+
+//subCategories
+export const ADD_SUBCATEGORY = "ADD_SUBCATEGORY"
+export const REMOVE_SUBCATEGORY = "REMOVE_SUBCATEGORY"
+export const FETCH_SUBCATEGORIES = "FETCH_SUBCATEGORIES"
+export const ADD_TO_SUBCATEGORY = "ADD_TO_SUBCATEGORY"
+export const REMOVE_FROM_SUBCATEGORY = "REMOVE_FROM_SUBCATEGORY"
+
+//products
+export const FETCH_PRODUCTS = "FETCH_PRODUCTS"
+export const FETCH_PRODUCT = "FETCH_PRODUCT"
+export const CREATE_PRODUCT = "CREATE_PRODUCT"
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT"
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+export const LIKE_PRODUCT = "LIKE_PRODUCT"
+export const EDIT_PRODUCT = "EDIT_PRODUCT"
+export const CLEAN_PRODUCT = "CLEAN_PRODUCT"
+
+//loading
+export const START_LOADING = "START_LOADING" 
+export const STOP_LOADING = "STOP_LOADING" 
+
+//cart
+export const NEW_CART = "NEW_CART"  
+export const FETCH_CART = "FETCH_CART"
+export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART"
+export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART"
+export const EDIT_CART = "EDIT_CART" 
+export const DELETE_CART = "DELETE_CART"
+
