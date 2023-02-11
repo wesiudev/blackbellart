@@ -8,7 +8,7 @@ router.post("/addProductToCart", async (req, res) => {
   try {
     const { cartID, productID, size, quantity, isOriginal } = req.body;
 
-    const existingCart = cartID !== "";
+    const existingCart = cartID !== undefined;
     const product = {
       productID,
       size,

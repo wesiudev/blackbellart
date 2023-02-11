@@ -16,6 +16,7 @@ export const addProductToCart =
     try {
       const { data } = await api.addProductToCart(cart);
       dispatch({ type: ADD_PRODUCT_TO_CART, data });
+      dispatch({ type: FETCH_CART, data });
     } catch (error: any) {
       dispatch(getServerFeedback(error?.response?.data?.msg, USE_SERVER_FEEDBACK));
       setTimeout(() => {

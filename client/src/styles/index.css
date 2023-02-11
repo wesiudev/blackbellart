@@ -392,6 +392,7 @@ header .content .nav__socials {
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin: 0 auto;
 }
 @media screen and (max-width: 1023px) {
   header .content .nav__socials {
@@ -423,7 +424,7 @@ header .content .nav__socials__items img {
     height: 3vh;
   }
 }
-header .content .nav__socials__language {
+header .content .nav .login-btn {
   border: none;
   background-color: transparent;
   display: flex;
@@ -435,7 +436,7 @@ header .content .nav__socials__language {
   color: black;
 }
 @media screen and (max-width: 1024px) {
-  header .content .nav__socials__language {
+  header .content .nav .login-btn {
     font-size: 3vh;
     padding-left: 0px;
     color: white;

@@ -10,7 +10,9 @@ import {useState, useEffect} from 'react'
 import useWindowDimensions from '../../common/hooks/useWindowDimensions'
 import { NavLink } from 'react-router-dom'
 
+
 const Header = () => {
+
     const [isMenuOpen, setMenuOpen] = useState(false);
     const { width } = useWindowDimensions();
     function handleNavVisibility() {
@@ -52,6 +54,7 @@ const Header = () => {
                                 <div className="nav__socials__items__item"><img src={isMenuOpen && width<=1023 ? youtubeWhiteIcon : youtubeIcon} alt="" /> </div>
                             </div>
                         </div>
+                            <button className="login-btn">ZALOGUJ</button>
                         {isMenuOpen ? <div className='nav__close' onClick={() => setMenuOpen(!isMenuOpen)}><span onClick={() => setMenuOpen(!isMenuOpen)} ></span></div> : null}
                     </div>
                 </div>

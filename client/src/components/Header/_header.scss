@@ -85,6 +85,7 @@ header{
                 display:flex;
                 align-items: center;
                 flex-direction: row;
+                margin: 0 auto;
                 &__items{
                     justify-content: space-between;
                     width:150px;
@@ -106,23 +107,22 @@ header{
                         }
                     }
                 }
-                &__language{
-                    border:none;
-                    background-color: transparent;
-                    display:flex;
-                    align-items: center;
-                    font-weight: 600;
-                    font-size: 18px;
-                    padding-left:25px;
-                    cursor:pointer;
-                    color:black;
-                    @media screen and (max-width:1024px) {
-                        font-size: 3vh;
-                        padding-left:0px;
-                        color:white;
-                    }
+            }
+            .login-btn{
+                border:none;
+                background-color: transparent;
+                display:flex;
+                align-items: center;
+                font-weight: 600;
+                font-size: 18px;
+                padding-left:25px;
+                cursor:pointer;
+                color:black;
+                @media screen and (max-width:1024px) {
+                    font-size: 3vh;
+                    padding-left:0px;
+                    color:white;
                 }
-
             }
             &__close{
                 position:absolute;
