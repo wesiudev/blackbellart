@@ -11,7 +11,7 @@ type PreviewProps = {
   setCurrentImage: Function;
   setCurrentInputValue: Function;
   setRealImageSource: Function;
-  setImageUrl:Function
+  setImageUrl: Function;
 };
 const ImageUpload = (props: PreviewProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,10 +60,10 @@ const ImageUpload = (props: PreviewProps) => {
       uploadBytes(imageRef, fireBaseImage).then(() =>
         getDownloadURL(imageRef).then((url) => {
           setIsLoading(false);
-        props.setCurrentInputValue(mongoImage);
-        props.setCurrentImage(mongoImage);
-        props.setRealImageSource(pseudoRandom);
-        props.setImageUrl(url);
+          props.setCurrentInputValue(mongoImage);
+          props.setCurrentImage(mongoImage);
+          props.setRealImageSource(pseudoRandom);
+          props.setImageUrl(url);
         })
       );
     } catch (err) {

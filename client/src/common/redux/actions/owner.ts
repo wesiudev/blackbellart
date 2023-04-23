@@ -1,6 +1,6 @@
-import { USE_SERVER_FEEDBACK, OWNER_AUTH } from "./actionTypes";
+import { OWNER_AUTH } from "./actionTypes";
 import * as api from "../api";
-import { clearServerFeedback, getServerFeedback } from "./serverFeedback";
+
 
 interface UserInput {
   userName:string
@@ -14,10 +14,7 @@ export const signInAdmin =
       const { data } = await api.signInAdmin(userInput);
       dispatch({ type: OWNER_AUTH, data });
     } catch (error: any) {
-      dispatch(getServerFeedback(error.response.data.msg, USE_SERVER_FEEDBACK));
-      setTimeout(() => {
-        dispatch(clearServerFeedback());
-      }, 5000);
+
     }
   };
 

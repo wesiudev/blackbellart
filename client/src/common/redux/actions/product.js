@@ -9,34 +9,19 @@ import {
   STOP_LOADING,
 } from "./actionTypes";
 import * as api from "../api";
-import { clearServerFeedback, getServerFeedback } from "./serverFeedback";
 
 export const addProduct = (req) => async (dispatch) => {
   try {
     const { data } = await api.addProduct(req);
     dispatch({ type: CREATE_PRODUCT, data });
-    dispatch(getServerFeedback(data.msg.text, data.msg.id));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  } catch (error) {
-    dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  }
+  } catch (error) {}
 };
 
 export const deleteProduct = (req) => async (dispatch) => {
   try {
     const { data } = await api.deleteProduct(req);
     dispatch({ type: REMOVE_PRODUCT, data });
-  } catch (error) {
-    dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  }
+  } catch (error) {}
 };
 
 export const editProduct = (req) => async (dispatch) => {
@@ -45,12 +30,7 @@ export const editProduct = (req) => async (dispatch) => {
     const { data } = await api.editProduct(req);
     dispatch({ type: EDIT_PRODUCT, data });
     dispatch({ type: STOP_LOADING });
-  } catch (error) {
-    dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  }
+  } catch (error) {}
 };
 
 export const fetchProducts = (req) => async (dispatch) => {
@@ -59,12 +39,7 @@ export const fetchProducts = (req) => async (dispatch) => {
     const { data } = await api.fetchProducts(req);
     dispatch({ type: FETCH_PRODUCTS, data });
     dispatch({ type: STOP_LOADING });
-  } catch (error) {
-    dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  }
+  } catch (error) {}
 };
 export const fetchProduct = (req) => async (dispatch) => {
   try {
@@ -72,12 +47,7 @@ export const fetchProduct = (req) => async (dispatch) => {
     const { data } = await api.fetchProduct(req);
     dispatch({ type: FETCH_PRODUCT, data });
     dispatch({ type: STOP_LOADING });
-  } catch (error) {
-    dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-    setTimeout(() => {
-      dispatch(clearServerFeedback());
-    }, 5000);
-  }
+  } catch (error) {}
 };
 export const cleanProduct = (req) => async (dispatch) => {
   try {

@@ -1,0 +1,12 @@
+{
+    "translation": {
+        "header_Gallery": "GALLERY",
+        "header_Shop": "SHOP",
+        "header_Contact": "CONTACT",
+        "header_Login": "SIGN IN",
+        "404_doesntExist": "This site doesnt exist,",
+        "404_goBack": "click here to get back to the home page.",
+        "canvasTitle": "3D canvas view",
+        "canvasRun": "Click here to start"
+    }
+}

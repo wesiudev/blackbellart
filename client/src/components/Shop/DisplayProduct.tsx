@@ -1,27 +1,35 @@
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
-import useCart from "../../common/hooks/useCart";
-import useProduct from "../../common/hooks/useProduct";
-import { addProductToCart, fetchCart } from "../../common/redux/actions/cart";
+import { useProduct } from "../../common/hooks/useProduct";
+import { addProductToCart } from "../../common/redux/actions/cart";
 import { fetchProducts } from "../../common/redux/actions/product";
 import { Image, IProduct } from "../../common/types/types";
 import GallerySlider from "./GallerySlider";
 import { ImagePreview } from "./Shop";
+import backImg from "../../common/images/arrow.png";
+import useCart from "../../common/hooks/useCart";
+import { CanvasFiber } from "./CanvasFiber";
+import { t } from "i18next";
+import ItemLoader from "../AdminTools/elements/productEditor/elements/itemLoader/itemLoader";
 
-const SingleProduct = () => {
+var randomstring = require("randomstring");
+
+const DisplayProduct = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch<any>();
   const searchQuery = searchParams.get("id");
   const product = useProduct(searchQuery!);
-  const cart = useCart();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isOriginal, setOriginal] = useState(true);
   const [chosenSize, setChosenSize] = useState("");
   const [noSizeAlert, setNoSizeAlert] = useState<boolean>(false);
+  const [isCanvasLoading, setCanvasLoading] = useState<boolean>(true);
+  const [isCanvasRunning, setCanvasRunning] = useState<boolean>(false);
   const cartData = useCart();
-  const isOneSizeAvailable: boolean = product && product.arrayOfCopySizes.length === 1;
+  const isOneSizeAvailable: boolean =
+    product && product.arrayOfCopySizes.length === 1;
   const productImages = product?.itemImages?.sort((a: Image, b: IProduct) =>
     a._id === b.primaryImage ? -1 : 1
   );
@@ -80,7 +88,8 @@ const SingleProduct = () => {
     }
 
     const req = {
-      productID: product?._id,
+      orderID: randomstring.generate(12),
+      product: product,
       size: `${isOriginal ? "oryginał" : returnSize()}`,
       isOriginal: isOriginal,
       cartID: `${cartData ? cartData?.cart?._id : ""}`,
@@ -96,10 +105,17 @@ const SingleProduct = () => {
     product && downloadImage();
     !product && dispatch(fetchProducts());
   }, []);
-  
+
   return (
     <>
       <div className="singleProduct">
+        <div className="shopNav">
+          <Link to="/shop" className="buttonBack">
+            {" "}
+            <img src={backImg} alt="" />{" "}
+            <div className="buttonBack__text"> Powrót</div>
+          </Link>
+        </div>
         <div className="singleProduct__content">
           <>
             <div className="thumbnails">
@@ -264,32 +280,58 @@ const SingleProduct = () => {
           </>
         </div>
 
-        <div className="itemDesc">
-          <h1>Opis</h1>
-          <div className="hr"></div>
-          <h2 className="itemDesc-description">{product?.itemDescription}</h2>
-          <h1>Rozmiary</h1>
-          <div className="hr"></div>
-          <div className="sizesDesc">
-            <div className="sizesDesc-original">
-              <h2 className="sizesDesc-headline">Oryginał</h2>
-              <h3 style={{ paddingBottom: "15px" }}>
-                {product?.sizeOfOriginalInCm}
-              </h3>
-            </div>
-            <div className="sizesDesc-copy">
-              <h2 className="sizesDesc-headline">Druki</h2>
-              {product?.arrayOfCopySizesInCm?.map((size: any, idx: number) => (
-                <h3 key={idx} style={{ paddingBottom: "15px" }}>
-                  {size.sizeOfCopyInCm}
-                </h3>
-              ))}
-            </div>
+        {/* <Canvas3D
+          img={product?.itemImages?.find(
+            (image: Image) => product?.primaryImage === image._id
+          )}
+        /> */}
+      </div>
+      <div className="descWrapper responsiveWidth">
+        <h1>{t("canvasTitle")}</h1>
+        <div className="canvasWrapper">
+          <div
+            className="canvasWrapper_onTop responsiveWidth"
+            style={{
+              marginTop: "0",
+              backgroundColor: isCanvasLoading ? "black" : "rgba(0, 0, 0, 0.5)",
+              transition: "0.5",
+              zIndex: isCanvasRunning ? "-1" : "1",
+            }}
+          >
+            {isCanvasLoading ? (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <ItemLoader loaderStyle="small" backgroundColor="black" />
+                <h1
+                  style={{
+                    width: "300px",
+                    margin: "0 auto 0px auto",
+                    height: "100%",
+                    border: "1px solid white",
+                    borderRadius: "20px",
+                  }}
+                >
+                  Ładowanie...
+                </h1>
+              </div>
+            ) : (
+              <button onClick={() => setCanvasRunning(true)}>
+                {t("canvasRun")}
+              </button>
+            )}
           </div>
+          <CanvasFiber
+            isCanvasRunning={isCanvasRunning}
+            setCanvasLoading={setCanvasLoading}
+            image={product?.itemImages?.find(
+              (image: Image) => product?.primaryImage === image._id
+            )}
+          />
         </div>
+        <h1>Opis obrazu</h1>
+        <p>{product?.itemDescription}</p>
       </div>
     </>
   );
 };
 
-export default SingleProduct;
+export default DisplayProduct;

@@ -4,7 +4,8 @@ import { getCategories } from "../../common/redux/actions/categories";
 import { fetchProducts } from "../../common/redux/actions/product";
 import { getSubCategories } from "../../common/redux/actions/subCategories";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, Link, useNavigate } from "react-router-dom";
+import backImg from "../../common/images/arrow.png";
 import {
   ICategory,
   Image,
@@ -69,13 +70,13 @@ const Shop = () => {
     !categories?.data?.length && dispatch(getCategories());
     !subCategories?.data?.length && dispatch(getSubCategories());
     !products?.data?.length && dispatch(fetchProducts());
-  },[]);
+  }, []);
 
   //query
   const navigate = useNavigate();
   function setQuery(id: string) {
     navigate({
-      pathname: "single product",
+      pathname: "product",
       search: `?${createSearchParams({
         id: id,
       })}`,
@@ -83,7 +84,7 @@ const Shop = () => {
   }
   //design
   const feedOffsetLeft = useRef<HTMLDivElement>(null);
-  
+
   const [navOffsetRight, setNavOffsetRight] = useState<any>();
   const [downloadedImg, setDownloadedImg] = useState<ImagePreview>({
     isOpen: false,
@@ -93,7 +94,6 @@ const Shop = () => {
   });
   function downloadImage(source: Image) {
     const storage = getStorage();
-    console.log("download");
     setDownloadedImg({
       ...downloadedImg,
       thumbnail: source.thumbnail,
@@ -119,59 +119,68 @@ const Shop = () => {
     setNavOffsetRight(feedOffsetLeft?.current?.offsetLeft!);
   }, []);
   return (
-    <div className="shop">
-      {downloadedImg?.isOpen && (
-        <>
-          <div className="fullHDPreview">
-            {downloadedImg.isLoading && <ItemLoader loaderStyle="fixed" />}
-            <FullHDPreview
-              previewSrc={
-                downloadedImg.fullHD
-                  ? downloadedImg.fullHD
-                  : downloadedImg.thumbnail
-              }
-              setDownloadedImg={setDownloadedImg}
-            />
-          </div>
-        </>
-      )}
-
-      <div ref={feedOffsetLeft} className="shop__feed">
-        {isFetching ? (
-          <ShopLoading />
-        ) : (
+    <>
+      <div className="shopNav responsiveWidth">
+        <Link to="/" className="buttonBack">
+          {" "}
+          <img src={backImg} alt="" />{" "}
+          <div className="buttonBack__text"> Strona główna</div>
+        </Link>
+      </div>
+      <div className="shop">
+        {downloadedImg?.isOpen && (
           <>
-            {currentCategory === "listAll" ? (
-              <ListAll
-                products={products?.data}
-                downloadImage={downloadImage}
-                setQuery={setQuery}
+            <div className="fullHDPreview">
+              {downloadedImg.isLoading && <ItemLoader loaderStyle="fixed" />}
+              <FullHDPreview
+                previewSrc={
+                  downloadedImg.fullHD
+                    ? downloadedImg.fullHD
+                    : downloadedImg.thumbnail
+                }
+                setDownloadedImg={setDownloadedImg}
               />
-            ) : (
-              <div>
-                <ListSingleCategory
-                  shopData={shopData?.content}
-                  currentCategory={currentCategory}
+            </div>
+          </>
+        )}
+
+        <div ref={feedOffsetLeft} className="shop__feed">
+          {isFetching ? (
+            <ShopLoading />
+          ) : (
+            <>
+              {currentCategory === "listAll" ? (
+                <ListAll
+                  products={products?.data}
                   downloadImage={downloadImage}
                   setQuery={setQuery}
                 />
-              </div>
-            )}
-          </>
+              ) : (
+                <div>
+                  <ListSingleCategory
+                    shopData={shopData?.content}
+                    currentCategory={currentCategory}
+                    downloadImage={downloadImage}
+                    setQuery={setQuery}
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        {isFetching ? (
+          <NavLoading />
+        ) : (
+          <Nav
+            navOffsetRight={navOffsetRight ? navOffsetRight : null}
+            navMenuContent={navMenuContent}
+            itemCount={products?.data?.length}
+            setCurrentCategory={setCurrentCategory}
+            currentCategory={currentCategory}
+          />
         )}
       </div>
-      {isFetching ? (
-        <NavLoading />
-      ) : (
-        <Nav
-          navOffsetRight={navOffsetRight ? navOffsetRight : null}
-          navMenuContent={navMenuContent}
-          itemCount={products?.data?.length}
-          setCurrentCategory={setCurrentCategory}
-          currentCategory={currentCategory}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

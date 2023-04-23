@@ -6,6 +6,7 @@
 @import '../components/Footer/footer';
 @import '../components/AdminTools/adminTools';
 @import '../components/shop/shop';
+@import '../components/Cart/cart';
 @import '../components/AdminTools/elements/SelectInput/selectInput';
 @import '../components/AdminTools/elements/MenagementPanels/newProduct';
 @import '../components/AdminTools/elements/productEditor/productEditor';
@@ -14,6 +15,12 @@
  
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap');
+.background{
+    background-color: rgba(161, 159, 159, 0.466);
+}
+.stroke{
+    -webkit-text-stroke: 1px rgba(105, 100, 100, 0.253);
+}
 body,html{
     box-sizing:border-box;
     padding:             0;

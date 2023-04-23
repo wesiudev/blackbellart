@@ -3,6 +3,9 @@
     background-color: black;
     display:flex;
     flex-direction: column;
+    @media screen and (max-width:1024px) {
+        margin-bottom: 80px;
+    }
     &__content{
         margin: 0 auto;
         width:70%;

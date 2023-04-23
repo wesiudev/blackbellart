@@ -1,3 +1,4 @@
+@use "sass:math";
 .wrapper{
     margin-top: 95px;
     width:70%;
@@ -221,7 +222,7 @@ $duration: .3s;
             position: absolute;
             display: block;
             background: rgb(255, 255, 255);
-            transition: all $duration/4 linear;
+            transition: all math.div($duration, 4) linear;
         }
         .bottom {
             width: 100%;
@@ -236,21 +237,22 @@ $duration: .3s;
         .right {
             top: 0;
             right: 0;
-            transition-delay: $duration/2;
+            transition-delay: math.div($duration, 2);
             transform-origin: top left;
         }
         .bottom {
             bottom: 0;
             right: 0;
-            transition-delay: $duration/4;
+            transition-delay: math.div($duration, 4);
             transform-origin: top right;
         }
         &:hover {
+            
         .right {
-            transition-delay: $duration/4;
+            transition-delay: math.div($duration, 4);
         }
         .bottom {
-            transition-delay: $duration/2;
+            transition-delay: math.div($duration, 2);
         }
         .bottom {
             transform: scaleX(1);

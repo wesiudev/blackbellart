@@ -6,28 +6,31 @@ const auth = require("../../middleware/auth.js");
 
 router.post("/addProductToCart", async (req, res) => {
   try {
-    const { cartID, productID, size, quantity, isOriginal } = req.body;
+    const { cartID, product, size, quantity, isOriginal, orderID } = req.body;
 
-    const existingCart = cartID !== undefined;
-    const product = {
-      productID,
+    const productToAdd = {
+      orderID,
+      product,
       size,
       quantity,
       isOriginal,
     };
-    if (existingCart) {
+    if (cartID !== "") {
       const cart = await Cart.findByIdAndUpdate(
         {
           _id: cartID,
         },
         {
-          $push: { products: product },
+          $push: { products: productToAdd },
         },
         { new: true }
       );
       res.status(200).json({
         cart: cart,
-        msg: { id: "SUCCESS", text: "W koszyku znajduje się nowy produkt." },
+        serverFeedback: {
+          id: "CARTSUCCESS",
+          text: "W koszyku znajduje się nowy produkt.",
+        },
       });
     } else {
       const newCart = await Cart.create({
@@ -38,18 +41,21 @@ router.post("/addProductToCart", async (req, res) => {
           _id: newCart._id,
         },
         {
-          $push: { products: product },
+          $push: { products: productToAdd },
         },
         { new: true }
       );
       res.status(200).json({
         cart: cart,
-        msg: { id: "SUCCESS", text: "W koszyku znajduje się nowy produkt." },
+        serverFeedback: {
+          id: "CARTSUCCESS",
+          text: "W koszyku znajduje się nowy produkt.",
+        },
       });
     }
   } catch (error) {
     res.status(500).json({
-      msg: error.message,
+      serverFeedback: error.message,
     });
   }
 });
@@ -61,34 +67,37 @@ router.post("/fetchCart", async (req, res) => {
     if (!cart) throw Error("Twój koszyk wygasł.");
     res.status(200).json({
       cart: cart,
-      msg: { id: "SUCCESS", text: "Pomyślnie wczytano produkty." },
+      serverFeedback: { id: "SUCCESS", text: "Pomyślnie wczytano produkty." },
     });
   } catch (error) {
     res.status(500).json({
-      msg: error.message,
+      serverFeedback: error.message,
     });
   }
 });
 
-router.delete("/deleteProduct", async (req, res) => {
+router.post("/deleteProductFromCart", async (req, res) => {
   try {
-    const { cartID, productID } = req.body;
+    const { cartID, orderID } = req.body;
     const cart = await Cart.findByIdAndUpdate(
       {
         _id: cartID,
       },
       {
-        $pull: { products: productID },
+        $pull: { products: { orderID: orderID } },
       },
       { new: true }
     );
     res.status(200).json({
       cart: cart,
-      msg: { id: "SUCCESS", text: "Produkt został usunięty z koszyka." },
+      serverFeedback: {
+        id: "CARTSUCCESS",
+        text: "Produkt został usunięty z koszyka.",
+      },
     });
   } catch (error) {
     res.status(500).json({
-      msg: error.message,
+      serverFeedback: error.message,
     });
   }
 });
@@ -117,7 +126,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //     }
 //     const products = await Product.find({});
 //     res.status(200).json({
-//       msg: {
+//       serverFeedback: {
 //         id: "SUCCESS",
 //         text: `Pomyślnie dodano produkt do podkategorii ${subCategory}.`,
 //       },
@@ -125,7 +134,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //     });
 //   } catch (error) {
 //     res.status(500).json({
-//       msg: error.message,
+//       serverFeedback: error.message,
 //     });
 //   }
 // });
@@ -317,7 +326,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //       );
 //     }
 //     res.status(200).json({
-//       msg: {
+//       serverFeedback: {
 //         id: "SUCCESS",
 //         text: `Pomyślnie edytowano produkt.`,
 //       },
@@ -325,7 +334,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //     });
 //   } catch (error) {
 //     res.status(500).json({
-//       msg: error.message,
+//       serverFeedback: error.message,
 //     });
 //   }
 // });
@@ -337,7 +346,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //     res.status(200).json(product);
 //   } catch (error) {
 //     res.status(500).json({
-//       msg: error.message,
+//       serverFeedback: error.message,
 //     });
 //   }
 // });
@@ -347,7 +356,7 @@ router.delete("/deleteProduct", async (req, res) => {
 //     res.status(200).json({ data: products });
 //   } catch (error) {
 //     res.status(500).json({
-//       msg: error.message,
+//       serverFeedback: error.message,
 //     });
 //   }
 // });

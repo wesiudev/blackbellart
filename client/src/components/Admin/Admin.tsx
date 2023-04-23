@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { LOGOUT } from '../../common/redux/actions/actionTypes';
-import { signInAdmin } from '../../common/redux/actions/auth';
+import { signInAdmin } from '../../common/redux/actions/owner';
 import AdminTools from '../AdminTools/AdminTools';
 import decode from "jwt-decode";
 const Admin = () => {
@@ -27,18 +27,18 @@ const Admin = () => {
             )
           );
           setTimeout(() => {
-            setUser(JSON.parse(localStorage.getItem("profile") as string))
+            setUser(JSON.parse(localStorage.getItem("owner") as string))
           }, 1000);
         }
 
     const [user, setUser] = useState<any>(
-        JSON.parse(localStorage.getItem("profile") as string)
+        JSON.parse(localStorage.getItem("owner") as string)
     );
 
     useEffect(() => {
         const token = user?.token;
         if (token) {
-          const decodedToken: object | any = decode(token);
+          const decodedToken: any = decode(token);
           if (decodedToken.exp * 1000 + 800100400 < new Date().getTime())
             dispatch({ type: LOGOUT });
         }

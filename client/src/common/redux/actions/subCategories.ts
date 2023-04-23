@@ -1,6 +1,6 @@
 import { ADD_SUBCATEGORY, FETCH_SUBCATEGORIES, REMOVE_SUBCATEGORY } from "./actionTypes";
 import * as api from "../api";
-import { clearServerFeedback, getServerFeedback } from "./serverFeedback";
+
 
 type ActionData = {
     category: string
@@ -14,15 +14,9 @@ type ActionData = {
       try {
         const { data } = await api.addSubCategory(req);
         dispatch({ type: ADD_SUBCATEGORY, data });
-        dispatch(getServerFeedback(data.msg.text, data.msg.id));
-        setTimeout(() => {
-          dispatch(clearServerFeedback());
-        }, 5000);
+
       } catch (error: any) {
-        dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-        setTimeout(() => {
-          dispatch(clearServerFeedback());
-        }, 5000);
+
       }
     };
     
@@ -32,15 +26,9 @@ type ActionData = {
       try {
         const { data } = await api.removeSubCategory(req);
         dispatch({ type: REMOVE_SUBCATEGORY, data });
-        dispatch(getServerFeedback(data.msg.text, data.msg.id));
-        setTimeout(() => {
-          dispatch(clearServerFeedback());
-        }, 5000);
+
       } catch (error: any) {
-        dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-        setTimeout(() => {
-          dispatch(clearServerFeedback());
-        }, 5000);
+
       }
     };
 
@@ -51,9 +39,6 @@ type ActionData = {
         const { data } = await api.fetchSubCategories();
         dispatch({ type: FETCH_SUBCATEGORIES, data });
       } catch (error: any) {
-        dispatch(getServerFeedback(error.response.data.msg, "ERROR"));
-        setTimeout(() => {
-          dispatch(clearServerFeedback());
-        }, 5000);
+
       }
     };

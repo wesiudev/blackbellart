@@ -86,14 +86,14 @@ const ImageModal = () => {
   };
   return (
     <>
-        <div style={{width:'100%', height:'100px', margin:'25px'}}>
-          <FileBase
-            ref={fileBaseRef}
-            type="file"
-            multiple={false}
-            onDone={(base64: any) => handleImageUpload(base64)}
-          />
-        </div>
+      <div style={{ width: "100%", height: "100px", margin: "25px" }}>
+        <FileBase
+          ref={fileBaseRef}
+          type="file"
+          multiple={false}
+          onDone={(base64: any) => handleImageUpload(base64)}
+        />
+      </div>
       {isEditorVisible ? (
         <div className="editor">
           <div className="editor__content">

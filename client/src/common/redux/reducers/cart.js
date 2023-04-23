@@ -11,13 +11,18 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
-    case DELETE_PRODUCT_FROM_CART:
       localStorage.setItem("blackbellcart", JSON.stringify(action.data));
       return {
         ...state,
         cart: action.data.cart,
       };
     case FETCH_CART:
+      return {
+        ...state,
+        cart: action.data,
+      };
+    case DELETE_PRODUCT_FROM_CART:
+      localStorage.setItem("blackbellcart", JSON.stringify(action.data));
       return {
         ...state,
         cart: action.data,

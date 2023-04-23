@@ -1,6 +1,7 @@
 //auth
 export const AUTH = "AUTH"
 export const LOGOUT = "LOGOUT"
+export const FETCH_USER = "FETCH_USER"
 
 //ownerauth
 export const OWNER_AUTH = "OWNER_AUTH"

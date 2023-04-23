@@ -9,6 +9,7 @@ const categoryRoutes = require("./routes/api/category.js");
 const subCategoryRoutes = require("./routes/api/subCategory.js");
 const productRoutes = require("./routes/api/product.js");
 const cartRoutes = require("./routes/api/cart.js");
+const createLocaleMiddleware = require("express-locale");
 
 const app = express();
 
@@ -31,13 +32,10 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected"))
-  .catch((err) => console.log(err));
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "..", "client", "build")));
@@ -50,9 +48,13 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, (err) => {
-  if (err) throw err;
-  console.log(`Server started on PORT ${port}`);
-});
+app
+  .use(createLocaleMiddleware())
+  .use((req, res) => {
+    res.status(200).json(req.locale);
+  })
+  .listen(port, (err) => {
+    if (err) throw err;
+  });
 
 module.exports = app;

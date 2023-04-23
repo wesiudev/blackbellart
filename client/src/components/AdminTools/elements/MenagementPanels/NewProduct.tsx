@@ -16,7 +16,7 @@ import MiniLoader from "../productEditor/elements/itemLoader/miniLoader";
 type imageObject = {
   thumbnail: string;
   imageName: string;
-  imageUrl: string
+  imageUrl: string;
 };
 type imageNames = {
   name: string;
@@ -35,12 +35,11 @@ type Product = {
   isOriginalAvailable: boolean;
   sizeOfOriginal: string | undefined;
   sizeOfOriginalInCm: string | undefined;
-  arrayOfCopySizes:sizeOfCopy[];
+  arrayOfCopySizes: sizeOfCopy[];
   arrayOfCopySizesInCm: sizeOfCopyInCm[];
   copyPrice: number | null;
   aboutMaterials: string | undefined;
   itemColor: color[] | undefined;
-  
 };
 
 export const NewProduct = () => {
@@ -52,16 +51,37 @@ export const NewProduct = () => {
   const [category, setCategory] = useState<string>("");
   const [currentlyLoadingImage, setCurrentlyLoadingImage] =
     useState<string>("");
-  const [copySizeInput, setCopySizeInput] = useState<sizeOfCopy>({ sizeOfCopy: "" });
-  const [sizeInCmInput, setSizeInCmInput] = useState<sizeOfCopyInCm>({ sizeOfCopyInCm: "" });
-  const [LocalArrayOfCopySizes, setLocalArrayOfCopySizes] = useState<sizeOfCopy[]>([]);
-  const [LocalArrayOfCopySizesInCm, setLocalArrayOfCopySizesInCm] = useState<sizeOfCopyInCm[]>([]);
+  const [copySizeInput, setCopySizeInput] = useState<sizeOfCopy>({
+    sizeOfCopy: "",
+  });
+  const [sizeInCmInput, setSizeInCmInput] = useState<sizeOfCopyInCm>({
+    sizeOfCopyInCm: "",
+  });
+  const [LocalArrayOfCopySizes, setLocalArrayOfCopySizes] = useState<
+    sizeOfCopy[]
+  >([]);
+  const [LocalArrayOfCopySizesInCm, setLocalArrayOfCopySizesInCm] = useState<
+    sizeOfCopyInCm[]
+  >([]);
   const [colorInput, setColorInput] = useState<color>({ color: "#ffffff" });
   const [arrayOfColors, setArrayOfColors] = useState<color[]>([]);
   const { categories } = useSelector((state: any) => state.categories);
 
   const [
-    { itemName, itemPrice, itemDescription, itemQuantity, isOriginalAvailable, sizeOfOriginal,sizeOfOriginalInCm, arrayOfCopySizes, arrayOfCopySizesInCm, copyPrice,aboutMaterials, itemColor },
+    {
+      itemName,
+      itemPrice,
+      itemDescription,
+      itemQuantity,
+      isOriginalAvailable,
+      sizeOfOriginal,
+      sizeOfOriginalInCm,
+      arrayOfCopySizes,
+      arrayOfCopySizesInCm,
+      copyPrice,
+      aboutMaterials,
+      itemColor,
+    },
     setProductData,
   ] = useState<Product>({
     itemName: "",
@@ -70,7 +90,7 @@ export const NewProduct = () => {
     itemQuantity: 0,
     isOriginalAvailable: true,
     sizeOfOriginal: "",
-    sizeOfOriginalInCm:"",
+    sizeOfOriginalInCm: "",
     arrayOfCopySizes: [],
     arrayOfCopySizesInCm: [],
     copyPrice: 0,
@@ -177,14 +197,14 @@ export const NewProduct = () => {
             {
               thumbnail: mongoImage,
               imageName: `image-${pseudoRandomName}`,
-              imageUrl: url
+              imageUrl: url,
             },
           ]);
           setCurrentlyLoadingImage("");
         })
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -216,7 +236,6 @@ export const NewProduct = () => {
   }, []);
 
   function deleteImage(name: string) {
-    console.log(name);
     // Create a reference to the file to delete
     const imageToDelete = ref(storage, `images/image-${name}`);
     // Delete the file
@@ -227,15 +246,18 @@ export const NewProduct = () => {
     deleteObject(imageToDelete);
   }
 
-  function addSizeToArray(e: any, array: string /* possible arrays: cm (for centimeters used in product desc) or copy (e.g. 30x40) */) {
+  function addSizeToArray(
+    e: any,
+    array: string /* possible arrays: cm (for centimeters used in product desc) or copy (e.g. 30x40) */
+  ) {
     e.preventDefault();
-    if(array === "copy"){
-    setLocalArrayOfCopySizes((LocalArrayOfCopySizes) => [
-      ...LocalArrayOfCopySizes,
-      { sizeOfCopy: copySizeInput.sizeOfCopy },
-    ]);
-    setCopySizeInput({ sizeOfCopy: "" });
-    }else if(array === "cm") {
+    if (array === "copy") {
+      setLocalArrayOfCopySizes((LocalArrayOfCopySizes) => [
+        ...LocalArrayOfCopySizes,
+        { sizeOfCopy: copySizeInput.sizeOfCopy },
+      ]);
+      setCopySizeInput({ sizeOfCopy: "" });
+    } else if (array === "cm") {
       setLocalArrayOfCopySizesInCm((LocalArrayOfCopyInCm) => [
         ...LocalArrayOfCopyInCm,
         { sizeOfCopyInCm: sizeInCmInput.sizeOfCopyInCm },
@@ -244,12 +266,19 @@ export const NewProduct = () => {
     }
   }
 
-  function deleteSize(size: string, array: string /* possible arrays: cm (for centimeters used in product desc) or copy (e.g. 30x40) */) {
-    if(array === "copy"){
-      let newArrayOfSizes = LocalArrayOfCopySizes.filter((item) => item.sizeOfCopy !== size);
+  function deleteSize(
+    size: string,
+    array: string /* possible arrays: cm (for centimeters used in product desc) or copy (e.g. 30x40) */
+  ) {
+    if (array === "copy") {
+      let newArrayOfSizes = LocalArrayOfCopySizes.filter(
+        (item) => item.sizeOfCopy !== size
+      );
       setLocalArrayOfCopySizes(newArrayOfSizes);
-    }else if (array === "cm"){
-      let newArrayOfSizes = LocalArrayOfCopySizesInCm.filter((item) => item.sizeOfCopyInCm !== size);
+    } else if (array === "cm") {
+      let newArrayOfSizes = LocalArrayOfCopySizesInCm.filter(
+        (item) => item.sizeOfCopyInCm !== size
+      );
       setLocalArrayOfCopySizesInCm(newArrayOfSizes);
     }
   }
@@ -359,7 +388,9 @@ export const NewProduct = () => {
               />
             </div>
             <div className="newProduct__content__inputs__text__input">
-              <label htmlFor={sizeOfOriginal}>Rozmiar oryginału (wzór: 20 x 30)</label>
+              <label htmlFor={sizeOfOriginal}>
+                Rozmiar oryginału (wzór: 20 x 30)
+              </label>
               <input
                 value={sizeOfOriginal}
                 onChange={handleTextInput}
@@ -368,7 +399,9 @@ export const NewProduct = () => {
               />
             </div>
             <div className="newProduct__content__inputs__text__input">
-              <label style={{maxWidth:"200px"}} htmlFor={sizeOfOriginalInCm}>Rozmiar oryginału (szerokość 20cm wysokość 30cm)</label>
+              <label style={{ maxWidth: "200px" }} htmlFor={sizeOfOriginalInCm}>
+                Rozmiar oryginału (szerokość 20cm wysokość 30cm)
+              </label>
               <input
                 value={sizeOfOriginalInCm}
                 onChange={handleTextInput}
@@ -384,7 +417,9 @@ export const NewProduct = () => {
                 <div className="row">
                   <input
                     value={copySizeInput.sizeOfCopy}
-                    onChange={(e) => setCopySizeInput({ sizeOfCopy: e.target.value })}
+                    onChange={(e) =>
+                      setCopySizeInput({ sizeOfCopy: e.target.value })
+                    }
                     type="text"
                     id="sizeInput"
                   />
@@ -407,11 +442,15 @@ export const NewProduct = () => {
             </form>
             <form onSubmit={(e) => addSizeToArray(e, "cm")}>
               <div>
-                <label style={{maxWidth:"200px"}} htmlFor="sizeOfCopyInput">Rozmiary kopii (szerokość 20cm wysokość 50cm) </label>
+                <label style={{ maxWidth: "200px" }} htmlFor="sizeOfCopyInput">
+                  Rozmiary kopii (szerokość 20cm wysokość 50cm){" "}
+                </label>
                 <div className="row">
                   <input
                     value={sizeInCmInput.sizeOfCopyInCm}
-                    onChange={(e) => setSizeInCmInput({ sizeOfCopyInCm: e.target.value })}
+                    onChange={(e) =>
+                      setSizeInCmInput({ sizeOfCopyInCm: e.target.value })
+                    }
                     type="text"
                     id="sizeOfCopyInput"
                   />
@@ -474,6 +513,5 @@ export const NewProduct = () => {
         </div>
       </div>
     </div>
-    
   );
 };
